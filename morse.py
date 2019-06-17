@@ -43,10 +43,14 @@ morse = {
     '"': '·—··—·',
     '!': '——··——'}
 
+def toMorse(texto):
+    cadena= texto.upper()
+    resultado = ""
+    for letra in cadena:
+        if letra in morse:
+            resultado+=morse[letra]
+            resultado+=" "
+        else:
+            resultado+=" "
 
-cadena= "Hola, mundo".upper()
-for letra in cadena:
-    if letra in morse:
-        print("{}-{}".format(letra,morse[letra]))
-    else:
-         print("no encontrado")
+    return resultado

@@ -6,4 +6,6 @@ telegrama = morse.toMorse(mensaje)
 
 print(telegrama)
 
- 
+ original = morse.toPlain(telegrama)
+
+ print(original)

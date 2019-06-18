@@ -70,4 +70,4 @@ def toPlain(codigo):
        else:
            letras += " "
 
-   return letras
+   return letras.capitalize()

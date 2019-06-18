@@ -48,10 +48,6 @@ for key in morse:
     valor=morse[key]
     reverso[valor]=key
 
-def toPlain(codigo):
-    
-
-
 def toMorse(texto):
     cadena= texto.upper()
     resultado = ""
@@ -63,3 +59,15 @@ def toMorse(texto):
             resultado+=" "
 
     return resultado
+
+def toPlain(codigo):
+   codigo = codigo.split(' ')
+   letras = ''
+   for caracter in codigo:
+       if caracter in reverso:
+           letras += reverso[caracter]
+
+       else:
+           letras += " "
+
+   return letras

@@ -1,5 +1,6 @@
 import morse
 import time
+from docx import Document
 
 mensaje = input("Dime algo:")
 

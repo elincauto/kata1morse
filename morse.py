@@ -120,4 +120,4 @@ def Telegram(Destinatario, Remitente, Mensaje):
 
         #document.save("demo.docx")
         
-        document.save("{}{}.docx".format(Destinatario, strftime("%Y%m%d%H%M%S%z", fechahora)))
+        document.save("envios/{}{}.docx".format(Destinatario, strftime("%Y%m%d%H%M%S%z", fechahora)))

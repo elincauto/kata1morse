@@ -14,6 +14,7 @@ for letra in cadena:
         print("no encontrado")
     else:
         #Obtener letas morse
-        pass
         print("{}-{}".format(letra,simbolos[posicion]))
+
+
 

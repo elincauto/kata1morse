@@ -3,8 +3,8 @@ Programar para crear telegramas con word
 y con suerte un traductor a morse con tkinter
 
 ## Instrucciones
-Clonar el repositorio
-Crear el entorno virtual
+Clonar el repositorio.
+Crear el entorno virtual.
 ```
 python -m venv <path_nombre_entorno>
 ```

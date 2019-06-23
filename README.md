@@ -2,7 +2,7 @@
 Programar para crear telegramas con word
 y con suerte un traductor a morse con tkinter
 
-##Instrucciones
+## Instrucciones
 Clonar el repositorio
 Crear el entorno virtual
 ```

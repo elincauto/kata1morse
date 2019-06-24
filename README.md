@@ -1,7 +1,14 @@
-# kata1morse
-Programa para crear morse
+# kata I Bootcamp 3ºEd morse
+Programar para crear telegramas con word
+y con suerte un traductor a morse con tkinter
 
-#instrucciones
-clonar el repositorio
-clonar el entorno virtual
-instalar dependencias
+## Instrucciones
+Clonar el repositorio.
+Crear el entorno virtual.
+```
+python -m venv <path_nombre_entorno>
+```
+Instalar dependencias con
+```
+pip install -r requirements.txt
+```

@@ -26,6 +26,8 @@ class Translator(ttk.Frame):
         self.origin_text = Text(self, width=26, height=8)
         self.origin_text.place(x=32, y=60)
 
+        self.origin_text.bind("<keyRelease>",self.traduce)
+
         self.destino_lbl = ttk.Label(self, text="Morse")
         self.destino_lbl.place(x=250, y=40)
         self.destino_text = Text(self, width=27, height=8)
@@ -37,20 +39,28 @@ class Translator(ttk.Frame):
         btn_change = ttk.Button(self, command=self.changeText, text="<=>")
         btn_change.place(y=140, x=500)
 
-        btn_traduce = ttk.Button(self,command=self.traduce, text="Traduce")
-        btn_traduce.place(y=115, x=500)
 
-    def traduce(self):
-        texto_original = self.origin_text.get(1) # aquí un error, hay que conseguir el texto de self.origin_text
+    def traduce(self, e= None):
+        texto_original = self.origin_text.get("1.0","end-1c") # aquí un error, hay que conseguir el texto de self.origin_text
         if self.traduccionDirecta:
             traduccion = morse.toMorse(texto_original)
         else:
             traduccion = morse.toPlain(texto_original)
+
+        self.destino_text.delete("1.0",END)
+        self.destino_insert(INSERT,traduccion)
+
         print(traduccion) # imprimir este texto realmente en destino_text
 
     def send_telegram(self):
-        print("Enviar telegrama")
-    
+        if self.sender.get()=="":
+            
+
+        if self.traduccionDirecta:
+            morse.Telegram(self.sender.get(),self.receiver.get(),self.origin_text.get("1.0","end-1c"))
+        else:
+             morse.Telegram(self.sender.get(),self.receiver.get(),self.destino_text.get("1.0","end-1c"))
+
     def changeText(self):
         if self.traduccionDirecta:
             self.origin_lbl.config(text='Morse')

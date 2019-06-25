@@ -1,6 +1,7 @@
 import morse
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 
 class Translator(ttk.Frame):
     def __init__(self, parent, **kwargs):
@@ -26,48 +27,62 @@ class Translator(ttk.Frame):
         self.origin_text = Text(self, width=26, height=8)
         self.origin_text.place(x=32, y=60)
 
-        self.origin_text.bind("<keyRelease>",self.traduce)
+        self.origin_text.bind("<KeyRelease>", self.traduce)
 
         self.destino_lbl = ttk.Label(self, text="Morse")
         self.destino_lbl.place(x=250, y=40)
         self.destino_text = Text(self, width=27, height=8)
         self.destino_text.place(x=270, y=60)
 
-        btn_send = ttk.Button(self,command=self.send_telegram, text="Send")
+        btn_send = ttk.Button(self, command=self.send_telegram, text="Send")
         btn_send.place(y=165, x=500)
 
         btn_change = ttk.Button(self, command=self.changeText, text="<=>")
         btn_change.place(y=140, x=500)
 
-
-    def traduce(self, e= None):
+    def traduce(self, e=None):
         texto_original = self.origin_text.get("1.0","end-1c") # aquí un error, hay que conseguir el texto de self.origin_text
         if self.traduccionDirecta:
             traduccion = morse.toMorse(texto_original)
         else:
             traduccion = morse.toPlain(texto_original)
-
-        self.destino_text.delete("1.0",END)
-        self.destino_insert(INSERT,traduccion)
-
-        print(traduccion) # imprimir este texto realmente en destino_text
+        self.destino_text.delete("1.0", END)
+        self.destino_text.insert(INSERT, traduccion) # imprimir este texto realmente en destino_text
 
     def send_telegram(self):
-        if self.sender.get()=="":
-            
-
+        sender = self.sender.get()
+        receiver = self.receiver.get()
         if self.traduccionDirecta:
-            morse.Telegram(self.sender.get(),self.receiver.get(),self.origin_text.get("1.0","end-1c"))
+            msg = self.origin_text.get("1.0", "end-1c")
         else:
-             morse.Telegram(self.sender.get(),self.receiver.get(),self.destino_text.get("1.0","end-1c"))
+            msg = self.destino_text.get("1.0", "end-1c")
+
+        if sender.strip() == "":
+            messagebox.showwarning()
+            messagebox.showwarning("Aviso", "Debe informar el sender", parent=self)
+            return
+        
+        if receiver.strip() == "":
+            messagebox.showwarning("Aviso", "Debe informar el receiver",parent=self)
+            return
+        
+        if msg.strip() == "":
+            messagebox.showwarning("Aviso", "Debe informar el mensaje", parent=self)
+            return
+
+        morse.telegram(sender, receiver, msg)
 
     def changeText(self):
+        self.origin_text.delete("1.0", END)
+        self.destino_text.delete("1.0", END)
         if self.traduccionDirecta:
             self.origin_lbl.config(text='Morse')
             self.destino_lbl.config(text='Plano')
         else:
             self.origin_lbl.config(text='Plano')
             self.destino_lbl.config(text='Morse')
+
+        #ARREGLAR EL CAMBIO
 
         self.traduccionDirecta = not self.traduccionDirecta
         
